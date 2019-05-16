@@ -6,8 +6,8 @@ import cv2
 def main():
     # this two lines are for loading the videos.
     # in this case the video are named as: cut1.mp4, cut2.mp4, ..., cut15.mp4
-    video_files = [n for n in os.listdir('resource') if n[-4:] == '.mp4']
-    video_files = sorted(video_files, key=lambda item: int(item.partition('-')[0]))
+    video_files = [n for n in os.listdir('resource') if n[-4:] == '.flv']
+    video_files = sorted(video_files, key=lambda item: int(item.partition('-')[2][:-4]))
 
     video_index = 0
     cap = cv2.VideoCapture(os.path.join('resource', video_files[video_index]))
@@ -21,7 +21,7 @@ def main():
             video_index += 1
             if video_index >= len(video_files):
                 break
-            cap = cv2.VideoCapture(os.path.join('df0_full', video_files[video_index]))
+            cap = cv2.VideoCapture(os.path.join('resource', video_files[video_index]))
             ret, frame = cap.read()
         cv2.imshow('frame', frame)
         out.write(frame)
